@@ -5,60 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <meta name="description" content="«Сквозь века» — мастерская художественной керамики Елены Давлетшиной в Казани. Авторские работы, изделия на заказ и мастер-классы.">
-  <meta name="theme-color" content="#102820">
+  <meta name="theme-color" content="#26281c">
   <title>Сквозь века — мастерская керамики в Казани</title>
   <link rel="icon" href="./assets/brand-emblem.webp">
-  <link rel="stylesheet" href="./style.css?v=4">
-  <script src="./site.js?v=4" defer></script>
+  <link rel="stylesheet" href="./style.css?v=7">
+  <script src="./site.js?v=5" defer></script>
 </head>
 <body id="top">
   <a class="skip" href="#main">Перейти к содержанию</a>
   <header class="site-header">
-    <a class="brand-emblem" href="#top" aria-label="Сквозь века — на главную">
-      <img src="./assets/brand-emblem.webp" alt="" width="64" height="64">
-    </a>
-    <nav aria-label="Разделы сайта">
+    <nav class="desktop-nav" aria-label="Разделы сайта">
       <a href="#works">Коллекция</a>
       <a href="#studio">О мастерской</a>
       <a href="#classes">Мастер-классы</a>
     </nav>
-    <a class="header-visit" href="#booking">Записаться</a>
+    <details class="mobile-menu">
+      <summary><span class="menu-lines" aria-hidden="true"></span><span class="visually-hidden">Меню</span></summary>
+      <nav aria-label="Разделы сайта">
+        <a href="#works">Коллекция</a>
+        <a href="#studio">О мастерской</a>
+        <a href="#classes">Мастер-классы</a>
+      </nav>
+    </details>
+    <a class="button header-booking" href="#booking">
+      <span>Записаться</span>
+      <span class="header-booking-icon" aria-hidden="true"><span></span></span>
+    </a>
   </header>
 
   <main id="main">
     <section class="hero" aria-labelledby="title">
       <div class="hero-media" aria-hidden="true">
-        <picture>
-          <source srcset="./assets/ceramics-cover-mobile.webp" media="(max-width: 620px)">
-          <img src="./assets/ceramics-cover.webp" alt="" fetchpriority="high">
-        </picture>
+        <img src="./assets/ceramics-table.webp" alt="" width="1536" height="1024" fetchpriority="high">
       </div>
-      <div class="hero-copy">
-        <p class="eyebrow">Мастерская керамики · Казань</p>
-        <h1 id="title"><span>Сквозь <em>века</em></span></h1>
-        <p class="hero-subtitle">Керамика с душой и историей</p>
-        <div class="hero-actions">
-          <a class="button button-light" href="#works">Смотреть коллекцию</a>
-          <a class="button button-light mobile-booking" href="#booking">Записаться</a>
-        </div>
-      </div>
-      <div class="hero-bottom">
-        <span>Елена Давлетшина</span>
-        <a class="scroll-cue" href="#heritage" aria-label="Перейти к истории мастерской"><span aria-hidden="true">↓</span></a>
-        <span>Авторская керамика</span>
+      <div class="hero-content">
+        <h1 id="title" class="hero-wordmark">
+          <span class="visually-hidden">Сквозь века</span>
+          <span class="wordmark-visual" aria-hidden="true">
+            <span class="wordmark-line">СКВ<span class="wordmark-stamp"><span class="stamp-art"><img src="./assets/brand-logo.webp" alt="" width="520" height="372"></span></span>ЗЬ</span>
+            <span class="wordmark-line">ВЕКА</span>
+          </span>
+        </h1>
+        <p class="hero-subtitle">Авторская керамика<br>и мастер-классы в Казани</p>
       </div>
     </section>
 
     <section class="heritage wrap" id="heritage" aria-labelledby="heritage-title">
-      <figure class="heritage-photo image-reveal reveal">
-        <img src="./assets/heritage-bowl.webp" alt="Керамическая чаша с синим орнаментом и птицей в центре" width="1000" height="1000" loading="lazy">
-      </figure>
-      <div class="heritage-copy reveal">
-        <p class="eyebrow">О бренде</p>
-        <h2 id="heritage-title">История, к которой <em>можно прикоснуться</em></h2>
-        <p>Волжская Булгария, Золотая Орда и древняя Казань вдохновляют Елену Давлетшину. Она изучает старинные сосуды, орнаменты и образы животных и переносит их в современную авторскую керамику.</p>
-        <p>В мастерской создают посуду по историческим образцам, декоративные панно, фигурки, украшения и сувениры на заказ.</p>
-        <a class="text-link" href="#studio">Познакомиться с мастером <span aria-hidden="true">↘</span></a>
+      <div class="heritage-heading reveal">
+        <p class="heritage-label">О мастерской</p>
+        <h2 id="heritage-title">История, к которой можно прикоснуться</h2>
+      </div>
+      <div class="heritage-body">
+        <div class="heritage-copy reveal">
+          <p>Волжская Булгария, Золотая Орда и древняя Казань вдохновляют Елену Давлетшину. Она переносит узоры старинных сосудов и образы животных в современную авторскую керамику.</p>
+          <p>В мастерской создают посуду по историческим образцам, декоративные панно, фигурки, украшения и сувениры на заказ.</p>
+          <a class="button button-accent" href="#studio">Познакомиться с мастером</a>
+        </div>
+        <div class="heritage-cards reveal">
+          <a class="heritage-card" href="#studio"><strong>20+</strong><span>лет работы с глиной</span></a>
+          <a class="heritage-card" href="#visit"><strong>ЦУМ</strong><span>Казань, Московская, 2</span></a>
+          <a class="heritage-card" href="#classes"><strong>Лепка</strong><span>и роспись на мастер-классах</span></a>
+          <figure class="heritage-card-photo"><img src="./assets/pottery-class.webp" alt="Руки гончара формуют чашу из глины" width="1672" height="941" loading="lazy"></figure>
+        </div>
       </div>
     </section>
 

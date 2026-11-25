@@ -18,7 +18,7 @@ let frame = 0;
 function drawCover() {
   frame = 0;
   const distance = Math.min(window.scrollY, hero.offsetHeight);
-  cover.style.translate = `0 ${distance * 0.22}px`;
+  cover.style.translate = `0 ${distance * 0.075}px`;
 }
 
 function scheduleCover() {
@@ -41,6 +41,16 @@ function updateCoverMotion() {
 
 motion.addEventListener('change', updateCoverMotion);
 updateCoverMotion();
+
+const mobileMenu = document.querySelector('.mobile-menu');
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => { mobileMenu.open = false; });
+});
+mobileMenu.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || !mobileMenu.open) return;
+  mobileMenu.open = false;
+  mobileMenu.querySelector('summary').focus();
+});
 
 const gallery = document.querySelector('.gallery');
 const galleryControls = document.querySelector('.gallery-actions');
