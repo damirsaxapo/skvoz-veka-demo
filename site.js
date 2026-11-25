@@ -6,25 +6,64 @@ if (motion.matches && 'IntersectionObserver' in window) {
       entry.target.classList.add('is-visible');
       observer.unobserve(entry.target);
     }
-  }, { threshold: 0.12 });
+  }, { threshold: 0.1 });
   document.documentElement.classList.add('motion');
   document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
 }
 
-if (motion.matches && matchMedia('(hover: hover) and (pointer: fine)').matches) {
-  const cover = document.querySelector('.hero-figure');
-  cover.addEventListener('pointermove', event => {
-    const bounds = cover.getBoundingClientRect();
-    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-    cover.style.setProperty('--x', `${x * -20}px`);
-    cover.style.setProperty('--y', `${y * -20}px`);
-  });
-  cover.addEventListener('pointerleave', () => {
-    cover.style.removeProperty('--x');
-    cover.style.removeProperty('--y');
-  });
+const cover = document.querySelector('.hero-media');
+const hero = cover.closest('.hero');
+let frame = 0;
+
+function drawCover() {
+  frame = 0;
+  const distance = Math.min(window.scrollY, hero.offsetHeight);
+  cover.style.translate = `0 ${distance * 0.22}px`;
 }
+
+function scheduleCover() {
+  if (!frame) frame = requestAnimationFrame(drawCover);
+}
+
+function updateCoverMotion() {
+  if (motion.matches) {
+    window.addEventListener('scroll', scheduleCover, { passive: true });
+    window.addEventListener('resize', scheduleCover);
+    scheduleCover();
+    return;
+  }
+  window.removeEventListener('scroll', scheduleCover);
+  window.removeEventListener('resize', scheduleCover);
+  if (frame) cancelAnimationFrame(frame);
+  frame = 0;
+  cover.style.removeProperty('translate');
+}
+
+motion.addEventListener('change', updateCoverMotion);
+updateCoverMotion();
+
+const gallery = document.querySelector('.gallery');
+const galleryControls = document.querySelector('.gallery-actions');
+const [previous, next] = galleryControls.querySelectorAll('button');
+
+function updateGalleryControls() {
+  const maximum = gallery.scrollWidth - gallery.clientWidth;
+  galleryControls.hidden = maximum <= 2;
+  previous.disabled = gallery.scrollLeft <= 2;
+  next.disabled = gallery.scrollLeft >= maximum - 2;
+}
+
+galleryControls.querySelectorAll('button').forEach(button => {
+  button.addEventListener('click', () => {
+    const [first, second] = gallery.children;
+    const step = second.offsetLeft - first.offsetLeft;
+    gallery.scrollBy({ left: step * Number(button.dataset.galleryStep), behavior: motion.matches ? 'smooth' : 'instant' });
+  });
+});
+
+gallery.addEventListener('scroll', updateGalleryControls, { passive: true });
+window.addEventListener('resize', updateGalleryControls);
+updateGalleryControls();
 
 const lightbox = document.querySelector('.lightbox');
 const links = [...document.querySelectorAll('[data-gallery]')];
