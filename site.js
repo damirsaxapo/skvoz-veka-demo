@@ -17,8 +17,9 @@ let frame = 0;
 
 function drawCover() {
   frame = 0;
-  const distance = Math.min(window.scrollY, hero.offsetHeight);
-  cover.style.translate = `0 ${distance * 0.22}px`;
+  const distance = Math.max(0, window.scrollY - hero.offsetTop);
+  const offset = Math.min(distance * 0.09, cover.offsetHeight * 0.04);
+  cover.style.translate = `0 ${offset}px`;
 }
 
 function scheduleCover() {
