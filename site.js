@@ -81,6 +81,7 @@ function makeBook(i) {
   const work = works[i];
   const book = document.createElement('div');
   book.className = 'shelf-book';
+  book.classList.toggle('has-long-title', work.title.length > 25);
   book.innerHTML = '<button type="button" class="shelf-face shelf-spine" tabindex="-1"><img alt="" draggable="false"><strong></strong><span class="shelf-number"></span></button><button type="button" class="shelf-face shelf-cover" tabindex="-1"><strong></strong><img alt="" draggable="false"><small>Сквозь века<span class="shelf-number"></span></small></button>';
   book.style.setProperty('--binding', work.palette[0]);
   book.style.setProperty('--letter', work.palette[1]);
@@ -224,17 +225,53 @@ viewport.addEventListener('wheel', event => {
 }, {passive:false});
 if (typeof lightbox.showModal === 'function') {
   const photo = lightbox.querySelector('img');
-  const caption = lightbox.querySelector('figcaption');
+  const caption = lightbox.querySelector('#lightbox-caption');
+  const story = lightbox.querySelector('.lightbox-story');
+  const video = lightbox.querySelector('video');
+  const replay = lightbox.querySelector('.lightbox-replay');
   const close = lightbox.querySelector('.lightbox-close');
   let index = 0;
   let opener;
 
+  function stopAnimation() {
+    video.pause();
+    video.hidden = true;
+    if (video.hasAttribute('src')) {
+      video.removeAttribute('src');
+      video.load();
+    }
+  }
+
+  function playAnimation() {
+    const source = links[index].dataset.motion;
+    if (!source || !motion.matches || !lightbox.open) return;
+    video.src = source;
+    video.play().catch(() => {});
+  }
+
+  video.addEventListener('playing', () => {
+    if (lightbox.open && motion.matches && !video.paused) video.hidden = false;
+  });
+  video.addEventListener('ended', () => { video.hidden = true; });
+  video.addEventListener('error', () => { video.hidden = true; });
+  replay.addEventListener('click', playAnimation);
+  motion.addEventListener('change', () => {
+    if (!motion.matches) stopAnimation();
+    replay.hidden = !motion.matches || !links[index].dataset.motion;
+  });
+
   function showPhoto(nextIndex) {
-    index = (nextIndex + links.length) % links.length;
+    stopAnimation();
+    index = wrap(nextIndex, links.length);
     const link = links[index];
     photo.src = link.href;
     photo.alt = link.querySelector('img').alt;
-    caption.textContent = link.closest('figure').querySelector('h3').textContent;
+    caption.textContent = works[index].title;
+    const notes = link.closest('figure').querySelector('.work-story');
+    story.replaceChildren(...[...notes.children].map(paragraph => paragraph.cloneNode(true)));
+    replay.hidden = !link.dataset.motion || !motion.matches;
+    lightbox.scrollTop = 0;
+    playAnimation();
     const step = wrap(index - selected + Math.floor(works.length / 2), works.length) - Math.floor(works.length / 2);
     if (step) selectBook(selected + step);
   }
@@ -244,8 +281,8 @@ if (typeof lightbox.showModal === 'function') {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       opener = link.closest('[hidden]') ? document.querySelector('.shelf-viewport') : link;
-      showPhoto(linkIndex);
       lightbox.showModal();
+      showPhoto(linkIndex);
       if (motion.matches) {
         lightbox.animate([{transform:'translateY(24px) scale(.91) rotate(-2deg)'},{transform:'none'}], {duration:320,easing:'cubic-bezier(.2,.8,.2,1)'});
       }
@@ -256,7 +293,10 @@ if (typeof lightbox.showModal === 'function') {
     button.addEventListener('click', () => showPhoto(index + Number(button.dataset.step)));
   });
   close.addEventListener('click', () => lightbox.close());
-  lightbox.addEventListener('close', () => opener?.focus());
+  lightbox.addEventListener('close', () => {
+    stopAnimation();
+    opener?.focus();
+  });
   lightbox.addEventListener('click', event => {
     if (event.target === lightbox) lightbox.close();
   });
