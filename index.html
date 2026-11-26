@@ -8,8 +8,8 @@
   <meta name="theme-color" content="#26281c">
   <title>Сквозь века — мастерская керамики в Казани</title>
   <link rel="icon" href="./assets/brand-emblem.webp">
-  <link rel="stylesheet" href="./style.css?v=8">
-  <script src="./site.js?v=6" defer></script>
+  <link rel="stylesheet" href="./style.css?v=9">
+  <script src="./site.js?v=7" defer></script>
 </head>
 <body id="top">
   <a class="skip" href="#main">Перейти к содержанию</a>
@@ -53,6 +53,51 @@
       </div>
     </section>
 
+    <section class="collection" id="works" aria-labelledby="works-title">
+      <div class="wrap">
+        <div class="shelf-heading">
+          <h2 id="works-title">Коллекция</h2>
+          <p>Керамика Елены Давлетшиной</p>
+        </div>
+        <div class="shelf" hidden>
+          <div class="shelf-viewport" tabindex="0" role="group" aria-label="Полка работ. Стрелки выбирают работу, Enter открывает фотографию.">
+            <div class="shelf-stage"></div>
+          </div>
+          <div class="shelf-footer">
+            <button type="button" class="shelf-arrow" data-dir="-1" aria-label="Предыдущая работа">←</button>
+            <div class="shelf-caption" aria-live="polite" aria-atomic="true">
+              <span class="shelf-count"></span>
+              <div class="caption-mask"><h3><button type="button" class="shelf-open"></button></h3></div>
+              <p></p>
+            </div>
+            <button type="button" class="shelf-arrow" data-dir="1" aria-label="Следующая работа">→</button>
+          </div>
+        </div>
+        <div class="gallery" tabindex="0" aria-label="Работы мастерской">
+          <figure class="work">
+            <a class="work-image" href="./assets/works.webp" data-gallery aria-label="Увеличить фото: «Атлар» и альбарелло"><img src="./assets/works.webp" alt="Кони из серии «Атлар» рядом с керамической вазой" width="1254" height="1254" loading="lazy"><span class="expand" aria-hidden="true">+</span></a>
+            <figcaption><h3>«Атлар» и альбарелло</h3><p>Кони ручной лепки и ваза с декором сграффито</p></figcaption>
+          </figure>
+          <figure class="work">
+            <a class="work-image" href="./assets/unicorn.webp" data-gallery aria-label="Увеличить фото: «Мифический единорог»"><img src="./assets/unicorn.webp" alt="Тёмный глазурованный подсвечник в форме единорога" width="921" height="795" loading="lazy"><span class="expand" aria-hidden="true">+</span></a>
+            <figcaption><h3>«Мифический единорог»</h3><p>Подсвечник ручной лепки, глазурь и эмаль</p></figcaption>
+          </figure>
+          <figure class="work">
+            <a class="work-image" href="./assets/heritage-bowl.webp" data-gallery aria-label="Увеличить фото: чаша с птицей"><img src="./assets/heritage-bowl.webp" alt="Чаша «Сквозь века» с птицей и синим узором" width="1000" height="1000" loading="lazy"><span class="expand" aria-hidden="true">+</span></a>
+            <figcaption><h3>Чаша с птицей</h3><p>Керамика по историческим мотивам</p></figcaption>
+          </figure>
+          <figure class="work">
+            <a class="work-image" href="./assets/birds.webp" data-gallery aria-label="Увеличить фото: «Симург» и «Феникс»"><img src="./assets/birds.webp" alt="Цветные керамические подсвечники в форме мифических птиц" width="1200" height="488" loading="lazy"><span class="expand" aria-hidden="true">+</span></a>
+            <figcaption><h3>«Симург» и «Феникс»</h3><p>Подсвечники в виде мифических птиц</p></figcaption>
+          </figure>
+          <figure class="work">
+            <a class="work-image" href="./assets/pattern-bowl.webp" data-gallery aria-label="Увеличить фото блюда с конём"><img src="./assets/pattern-bowl.webp" alt="Блюдо с фигурой коня и синим орнаментом" loading="lazy"></a>
+            <figcaption><h3>Блюдо с конём</h3><p>Фигура коня в окружении синего орнамента</p></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
     <section class="heritage wrap" id="heritage" aria-labelledby="heritage-title">
       <div class="heritage-heading reveal">
         <p class="heritage-label">О мастерской</p>
@@ -69,39 +114,6 @@
           <a class="heritage-card" href="#visit"><strong>ЦУМ</strong><span>Казань, Московская, 2</span></a>
           <a class="heritage-card" href="#classes"><strong>Лепка</strong><span>и роспись на мастер-классах</span></a>
           <figure class="heritage-card-photo"><img src="./assets/pottery-class.webp" alt="Руки гончара формуют чашу из глины" width="1672" height="941" loading="lazy"></figure>
-        </div>
-      </div>
-    </section>
-
-    <section class="collection" id="works" aria-labelledby="works-title">
-      <div class="wrap">
-        <div class="section-heading reveal">
-          <div>
-            <p class="eyebrow">Изделия ручной работы</p>
-            <h2 id="works-title">Коллекция</h2>
-          </div>
-          <div class="gallery-actions" hidden>
-            <button type="button" data-gallery-step="-1" aria-label="Предыдущие работы" disabled>←</button>
-            <button type="button" data-gallery-step="1" aria-label="Следующие работы">→</button>
-          </div>
-        </div>
-        <div class="gallery" tabindex="0" aria-label="Работы мастерской">
-          <figure class="work reveal">
-            <a class="work-image" href="./assets/works.webp" data-gallery aria-label="Увеличить фото: «Атлар» и альбарелло"><img src="./assets/works.webp" alt="Кони из серии «Атлар» рядом с керамической вазой" width="1254" height="1254" loading="lazy"><span class="expand" aria-hidden="true">+</span></a>
-            <figcaption><h3>«Атлар» и альбарелло</h3><p>Кони ручной лепки и ваза с декором сграффито</p></figcaption>
-          </figure>
-          <figure class="work reveal">
-            <a class="work-image" href="./assets/unicorn.webp" data-gallery aria-label="Увеличить фото: «Мифический единорог»"><img src="./assets/unicorn.webp" alt="Тёмный глазурованный подсвечник в форме единорога" width="921" height="795" loading="lazy"><span class="expand" aria-hidden="true">+</span></a>
-            <figcaption><h3>«Мифический единорог»</h3><p>Подсвечник ручной лепки, глазурь и эмаль</p></figcaption>
-          </figure>
-          <figure class="work reveal">
-            <a class="work-image" href="./assets/heritage-bowl.webp" data-gallery aria-label="Увеличить фото: чаша с птицей"><img src="./assets/heritage-bowl.webp" alt="Чаша «Сквозь века» с птицей и синим узором" width="1000" height="1000" loading="lazy"><span class="expand" aria-hidden="true">+</span></a>
-            <figcaption><h3>Чаша с птицей</h3><p>Керамика по историческим мотивам</p></figcaption>
-          </figure>
-          <figure class="work">
-            <a class="work-image" href="./assets/birds.webp" data-gallery aria-label="Увеличить фото: «Симург» и «Феникс»"><img src="./assets/birds.webp" alt="Цветные керамические подсвечники в форме мифических птиц" width="1200" height="488" loading="lazy"><span class="expand" aria-hidden="true">+</span></a>
-            <figcaption><h3>«Симург» и «Феникс»</h3><p>Подсвечники в виде мифических птиц</p></figcaption>
-          </figure>
         </div>
       </div>
     </section>
