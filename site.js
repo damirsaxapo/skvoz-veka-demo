@@ -11,14 +11,14 @@ if (motion.matches && 'IntersectionObserver' in window) {
   document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
 }
 
-const cover = document.querySelector('.hero-media');
-const hero = cover.closest('.hero');
+const plate = document.querySelector('.hero-plate');
+const hero = plate.closest('.hero');
 let frame = 0;
 
 function drawCover() {
   frame = 0;
-  const distance = Math.min(window.scrollY, hero.offsetHeight);
-  cover.style.translate = `0 ${distance * 0.075}px`;
+  const progress = Math.max(0, Math.min(window.scrollY / hero.offsetHeight, 1));
+  plate.style.setProperty('--plate-turn', `${progress * 160}deg`);
 }
 
 function scheduleCover() {
@@ -36,7 +36,7 @@ function updateCoverMotion() {
   window.removeEventListener('resize', scheduleCover);
   if (frame) cancelAnimationFrame(frame);
   frame = 0;
-  cover.style.removeProperty('translate');
+  plate.style.removeProperty('--plate-turn');
 }
 
 motion.addEventListener('change', updateCoverMotion);

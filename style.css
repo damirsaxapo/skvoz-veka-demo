@@ -114,20 +114,40 @@ section[id], footer[id] { scroll-margin-top: 24px; }
   align-items: end;
   isolation: isolate;
   overflow: clip;
-  min-height: clamp(595px, calc(100svh - 58px), 900px);
-  background: #26281c;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #191a11;
   color: #fffef9;
 }
 .hero-media {
   position: absolute;
   z-index: -2;
-  inset: -2% 0;
+  inset: 0;
+  container-type: size;
+  overflow: hidden;
 }
-.hero-media img {
+.hero-scene {
+  position: absolute;
+  left: 50%;
+  top: 16%;
+  width: max(100cqw, 150cqh);
+  aspect-ratio: 3 / 2;
+  transform: translate(-50%, -16%);
+}
+.hero-scene img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: 52% 54%;
+}
+/* The rim occupies a 520 × 512 ellipse at (572, 98) in the 1536 × 1024 photograph. */
+.hero-plate {
+  position: absolute;
+  left: 37.239583%;
+  top: 9.5703125%;
+  width: 33.854167%;
+  height: 50%;
+  background: url("./assets/ceramics-table.webp") 56.29921% 19.140625% / 295.384615% 200% no-repeat;
+  mask-image: radial-gradient(ellipse closest-side, #000 94%, transparent 100%);
+  transform: rotate(var(--plate-turn, 0deg));
 }
 .hero::after {
   content: "";
@@ -493,11 +513,10 @@ h3 { font-size: clamp(1.5rem, 2.4vw, 2.32rem); line-height: 1; }
 .lightbox figcaption { padding: .8rem 1rem; line-height: 1.35; text-align: center; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero-media img { animation: cover-arrive 1800ms var(--ease-out) both; }
   .wordmark-line, .hero-subtitle { animation: rise 700ms var(--ease-out) both; }
   .wordmark-line + .wordmark-line { animation-delay: 55ms; }
   .hero-subtitle { animation-delay: 110ms; }
-  .stamp-art { animation: stamp-settle 850ms var(--ease-out) 110ms both; }
+  .stamp-art { animation: stamp-turn 48s linear infinite; }
   .motion .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -508,8 +527,7 @@ h3 { font-size: clamp(1.5rem, 2.4vw, 2.32rem); line-height: 1; }
   .motion .image-reveal.is-visible { clip-path: inset(0); }
 }
 
-@keyframes cover-arrive { from { transform: scale(1.065); } to { transform: scale(1.015); } }
-@keyframes stamp-settle { from { transform: rotate(-34deg); } to { transform: rotate(0); } }
+@keyframes stamp-turn { to { transform: rotate(1turn); } }
 @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
 @media (max-width: 900px) {
@@ -553,8 +571,11 @@ h3 { font-size: clamp(1.5rem, 2.4vw, 2.32rem); line-height: 1; }
   .mobile-menu nav a { padding: .72rem .5rem; }
   .header-booking { gap: .62rem; min-height: 44px; padding-left: 14px; }
   .header-booking-icon { width: 34px; height: 34px; }
-  .hero { min-height: clamp(505px, calc(86svh - 12px), 730px); }
-  .hero-media img { object-position: 58% 50%; }
+  .hero-media {
+    height: min(100%, 182vw);
+    mask-image: linear-gradient(#000 76%, transparent);
+  }
+  .hero-scene { top: 0; left: 54.17%; transform: translate(-54.17%, 0); }
   .hero::after {
     background: linear-gradient(180deg, #14150d65 0%, transparent 27%, transparent 45%, #14150dac 100%);
   }
